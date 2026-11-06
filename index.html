@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FarmaCIA - Realidad Aumentada</title>
+  <title>Catálogo 3D - Melamina</title>
   
   <!-- Carga del componente web oficial de Google -->
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
@@ -21,13 +21,49 @@
       font-family: sans-serif;
       background-color: #f4f4f9;
     }
+    
+    /* Menú superior de selección de muebles */
+    .menu-bar {
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 8px 15px;
+      border-radius: 25px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      max-width: 90vw;
+      overflow-x: auto;
+    }
+
+    .btn-mueble {
+      background-color: #e0e0e0;
+      color: #333;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 15px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-mueble.activo {
+      background-color: #007bff;
+      color: white;
+    }
+
     model-viewer {
       width: 100vw;
       height: 100vh;
       --poster-color: transparent;
     }
+
     .ar-button {
-      background-color: #007bff;
+      background-color: #28a745;
       color: white;
       border: none;
       border-radius: 8px;
@@ -45,21 +81,40 @@
 </head>
 <body>
 
-  <!-- Componente 3D / AR con tu modelo farmaCIA.glb -->
+  <!-- Menú de Botones -->
+  <div class="menu-bar">
+    <button class="btn-mueble activo" onclick="cambiarModelo('https://raw.githubusercontent.com/negritoeduardo/cat-3d/main/farmaCIA.glb', this)">Farmacia</button>
+    <button class="btn-mueble" onclick="cambiarModelo('https://raw.githubusercontent.com/negritoeduardo/cat-3d/main/Sin%20t%C3%ADtulo.glb', this)">Segundo Mueble</button>
+  </div>
+
+  <!-- Visor 3D -->
   <model-viewer 
+    id="visor"
     src="https://raw.githubusercontent.com/negritoeduardo/cat-3d/main/farmaCIA.glb" 
     ar 
     ar-modes="scene-viewer webxr quick-look" 
     camera-controls 
     touch-action="pan-y"
     shadow-intensity="1"
-    alt="Modelo 3D de Farmacia">
+    alt="Modelo 3D de melamina">
     
     <button slot="ar-button" class="ar-button">
       Ver en tu espacio (AR) 📱
     </button>
     
   </model-viewer>
+
+  <script>
+    function cambiarModelo(url, boton) {
+      // Cambia la fuente del modelo 3D
+      document.getElementById('visor').src = url;
+
+      // Actualiza los colores de los botones
+      const botones = document.querySelectorAll('.btn-mueble');
+      botones.forEach(btn => btn.classList.remove('activo'));
+      boton.classList.add('activo');
+    }
+  </script>
 
 </body>
 </html>

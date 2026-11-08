@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generador de Proyectos 3D | Studio Melaminas El Negrito</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0c0d11;--card:#15171d;--line:#262a33;--tx:#eef0f4;--su:#9aa1ad;--am:#ffb02e;--or:#ff7a1a;--wa:#25d366}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',system-ui,sans-serif}
+body{background:var(--bg);color:var(--tx);padding:20px;line-height:1.5}
+.top{max-width:1100px;margin:0 auto 18px;display:flex;align-items:center;gap:14px}
+.top img{width:56px;height:56px;border-radius:50%;border:2px solid var(--or)}
+h1{font-family:'Archivo',sans-serif;font-size:20px}
+.sub{color:var(--su);font-size:13px}
+.wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:20px;align-items:start}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+h2{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--am);margin:20px 0 10px}
+h2:first-child{margin-top:0}
+.row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.row2{grid-template-columns:1fr 1fr}
+label{display:block;font-size:12px;font-weight:600;color:var(--su);margin-bottom:5px}
+.f{margin-bottom:12px}
+input,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#0f1116;color:var(--tx);font-size:14px}
+input:focus,textarea:focus{outline:2px solid var(--or);border-color:transparent}
+.btn{display:block;width:100%;padding:13px;border:0;border-radius:10px;font-weight:700;font-size:15px;cursor:pointer;text-align:center;text-decoration:none;color:#fff;background:linear-gradient(135deg,var(--or),#e0561a)}
+.btn.wa{background:var(--wa);color:#06260f}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--tx)}
+.acts{display:grid;gap:10px;margin-top:18px}
+.link{display:flex;gap:8px}
+.link input{font-size:12px;color:var(--am)}
+.link .btn{width:auto;padding:0 18px}
+.steps{font-size:12px;color:var(--su);margin-top:14px;padding-left:18px}
+.phone{position:sticky;top:16px}
+.pl{font-size:12px;color:var(--su);text-align:center;margin-bottom:8px}
+.frame{height:740px;max-height:calc(100vh - 70px);border:8px solid #2a2d38;border-radius:32px;overflow:hidden;background:#000}
+.frame iframe{width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<div class="top">
+  <img src="https://negritoeduardo.github.io/cat-3d/logo-negrito-256.jpg" alt="Logo">
+  <div><h1>Generador de Proyectos 3D</h1><p class="sub">Crea la página exclusiva de cada cliente: visor 3D, realidad aumentada y cierre por WhatsApp.</p></div>
+</div>
+
+<div class="wrap">
+  <div class="panel">
+    <h2>Cliente</h2>
+    <div class="row row2">
+      <div class="f"><label>Nombre del cliente</label><input id="cliente" value="Juan Pérez"></div>
+      <div class="f"><label>WhatsApp del cliente (opcional)</label><input id="tel" placeholder="9XXXXXXXX"></div>
+    </div>
+
+    <h2>Proyecto</h2>
+    <div class="f"><label>Mueble / proyecto</label><input id="mueble" value="Ropero Moderno con Tocador"></div>
+    <div class="row row2">
+      <div class="f"><label>Precio total (S/)</label><input id="precio" value="1,400.00"></div>
+      <div class="f"><label>Presupuesto válido hasta</label><input id="valido" type="date"></div>
+    </div>
+    <div class="row">
+      <div class="f"><label>Alto (cm)</label><input id="alto" inputmode="numeric"></div>
+      <div class="f"><label>Ancho (cm)</label><input id="ancho" inputmode="numeric"></div>
+      <div class="f"><label>Fondo (cm)</label><input id="fondo" inputmode="numeric"></div>
+    </div>
+    <div class="f"><label>Materiales y detalles</label><textarea id="detalles" rows="3">Melamina texturada color Nogal con herrajes cierre lento y espejo biselado.</textarea></div>
+
+    <h2>Condiciones (genera confianza)</h2>
+    <div class="row">
+      <div class="f"><label>Entrega</label><input id="entrega" value="15 días hábiles"></div>
+      <div class="f"><label>Adelanto (%)</label><input id="adel" value="50" inputmode="numeric"></div>
+      <div class="f"><label>Garantía</label><input id="garantia" value="6 meses"></div>
+    </div>
+
+    <h2>Modelo 3D</h2>
+    <div class="f"><label>Nombre del .glb en cat-3d (o enlace completo)</label><input id="glb" value="farmaCIA.glb"></div>
+
+    <h2>Enlace final del cliente</h2>
+    <div class="link"><input id="url" readonly><button class="btn ghost" onclick="copiar()">Copiar</button></div>
+
+    <div class="acts">
+      <button class="btn" onclick="descargar()">⬇ Descargar página del cliente</button>
+      <a class="btn ghost" id="probar" target="_blank" rel="noopener">🔍 Probar que el enlace funcione</a>
+      <a class="btn wa" id="waCli" target="_blank" rel="noopener">💬 Enviar enlace al cliente por WhatsApp</a>
+    </div>
+    <ol class="steps">
+      <li>Descarga la página y súbela a la <b>raíz</b> de <b>cat-3d</b>, junto al .glb (sin carpetas), en la rama principal.</li>
+      <li>El nombre del archivo en GitHub debe ser <b>idéntico</b> al final del enlace.</li>
+      <li>Espera 1 o 2 minutos, pulsa <b>Probar enlace</b> y, si abre, envíalo al cliente.</li>
+    </ol>
+  </div>
+
+  <div class="phone">
+    <p class="pl">Vista previa real (así lo verá en su celular)</p>
+    <div class="frame"><iframe id="pv" title="Vista previa"></iframe></div>
+  </div>
+</div>
+
+<script>
+const BASE='https://negritoeduardo.github.io/cat-3d/', WA='51916949028';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const slug=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const money=n=>'S/ '+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const wa=t=>'https://wa.me/'+WA+'?text='+encodeURIComponent(t);
+const tok=t=>{let h=7;for(const c of t)h=(h*31+c.charCodeAt(0))>>>0;return h.toString(36).slice(0,4)};
+let timer, current={};
+
+function glbUrl(v){
+  v=v.trim(); if(!v) return '';
+  v=v.replace(/^https?:\/\/raw\.githubusercontent\.com\/negritoeduardo\/cat-3d\/[^/]+\//,BASE);
+  return /^https?:/.test(v)?v:BASE+v.replace(/^\/+/,'');
+}
+
+function read(){
+  const g=id=>$(id).value.trim();
+  return {cliente:g('cliente'),tel:g('tel'),mueble:g('mueble'),precio:g('precio'),valido:g('valido'),
+    alto:g('alto'),ancho:g('ancho'),fondo:g('fondo'),detalles:g('detalles'),entrega:g('entrega'),
+    adel:g('adel'),garantia:g('garantia'),glb:glbUrl(g('glb'))};
+}
+
+function build(d){
+  const C=esc(d.cliente||'Cliente'), T=esc(d.mueble||'Mueble a medida'), G=esc(d.glb);
+  const p=parseFloat(d.precio.replace(/[^\d.]/g,''));
+  const P=isFinite(p)?money(p):'S/ '+esc(d.precio||'—');
+  const pct=parseFloat(d.adel), adelanto=isFinite(p)&&isFinite(pct)?' ('+money(p*pct/100)+')':'';
+  const med=[['Alto',d.alto],['Ancho',d.ancho],['Fondo',d.fondo]].filter(m=>m[1]).map(m=>'<span class="chip">'+m[0]+' <b>'+esc(m[1])+' cm</b></span>').join('');
+  const val=d.valido?new Date(d.valido+'T12:00:00').toLocaleDateString('es-PE',{day:'numeric',month:'long',year:'numeric'}):'';
+  const ok=wa('¡Hola! Soy '+d.cliente+'. Revisé el diseño 3D de mi '+d.mueble+' ('+(isFinite(p)?money(p):d.precio)+') y quiero aprobarlo y reservar con el adelanto.');
+  const cambios=wa('Hola, soy '+d.cliente+'. Vi el diseño 3D de mi '+d.mueble+' y me gustaría pedir estos cambios: ');
+  const trust=[['⏱','Entrega',d.entrega],['💳','Adelanto',d.adel?esc(d.adel)+'%'+adelanto:''],['🛡','Garantía',d.garantia],['📐','Fabricación','A tu medida']]
+    .filter(t=>t[2]).map(t=>'<div class="tr"><span>'+t[0]+'</span><div><small>'+t[1]+'</small><b>'+(t[1]==='Adelanto'?t[2]:esc(t[2]))+'</b></div></div>').join('');
+  return `<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>${T} | Studio Melaminas El Negrito</title>
+<meta property="og:title" content="${T} · diseño 3D para ${C}">
+<meta property="og:description" content="Míralo en 3D y proyéctalo en tu casa con realidad aumentada.">
+<meta property="og:image" content="${BASE}logo-negrito.jpg">
+<script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"><\/script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0c0d11;--card:#15171d;--line:#262a33;--tx:#eef0f4;--su:#9aa1ad;--am:#ffb02e;--or:#ff7a1a;--wa:#25d366}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',system-ui,sans-serif}
+body{background:var(--bg);color:var(--tx);line-height:1.5;padding-bottom:96px}
+header{text-align:center;padding:20px 16px 6px}
+header img{width:96px;height:96px;border-radius:50%;border:2px solid var(--or);box-shadow:0 0 28px rgba(255,122,26,.45)}
+header p{font-size:13px;color:var(--su);margin-top:10px}
+header b{color:var(--am)}
+main{max-width:760px;margin:0 auto;padding:12px 16px;display:grid;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+model-viewer{width:100%;height:min(60vh,480px);background:radial-gradient(circle at 50% 40%,#2c2f3b,#12141a);--progress-bar-color:#ffb02e}
+#ar{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:#fff;color:#111;border:0;border-radius:999px;padding:12px 22px;font-weight:700;font-size:14px;box-shadow:0 6px 18px rgba(0,0,0,.5);cursor:pointer;white-space:nowrap}
+.hint{font-size:12px;color:var(--su);text-align:center;padding:10px 14px;border-top:1px solid var(--line)}
+.info{padding:22px;display:grid;gap:16px}
+.tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--am);font-weight:600}
+h1{font-family:'Archivo',sans-serif;font-size:26px;line-height:1.2;margin-top:4px}
+.precio{font-family:'Archivo',sans-serif;font-size:34px;font-weight:800;background:linear-gradient(135deg,var(--am),var(--or));-webkit-background-clip:text;background-clip:text;color:transparent;margin-top:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:#0f1116;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;color:var(--su)}
+.chip b{color:var(--tx)}
+.desc{color:var(--su);font-size:15px}
+.desc b{color:var(--tx)}
+.trust{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tr{display:flex;gap:10px;align-items:center;background:#0f1116;border:1px solid var(--line);border-radius:12px;padding:12px}
+.tr span{font-size:20px}
+.tr small{display:block;font-size:11px;color:var(--su);text-transform:uppercase;letter-spacing:.06em}
+.tr b{font-size:14px}
+.valid{font-size:13px;color:var(--am);background:rgba(255,176,46,.08);border:1px solid rgba(255,176,46,.3);border-radius:10px;padding:10px 12px;text-align:center}
+.cta{display:block;text-align:center;background:var(--wa);color:#06260f;font-weight:800;font-size:17px;padding:16px;border-radius:14px;text-decoration:none}
+.alt{display:block;text-align:center;color:var(--su);font-size:14px;text-decoration:underline;padding:6px}
+footer{text-align:center;padding:10px 16px 24px;font-size:12px;color:var(--su)}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:9;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:rgba(12,13,17,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+.bar small{display:block;font-size:11px;color:var(--su)}
+.bar b{font-family:'Archivo',sans-serif;font-size:20px;color:var(--am)}
+.bar a{background:var(--wa);color:#06260f;font-weight:800;padding:13px 20px;border-radius:12px;text-decoration:none;font-size:15px}
+</style></head>
+<body>
+<header>
+  <img src="${BASE}logo-negrito-256.jpg" alt="Studio Melaminas El Negrito">
+  <p>Diseño exclusivo para <b>${C}</b></p>
+</header>
+<main>
+  <div class="card">
+    <model-viewer src="${G}" alt="${T}" camera-controls auto-rotate touch-action="pan-y" ar ar-modes="webxr scene-viewer quick-look" shadow-intensity="1" environment-image="neutral">
+      <button slot="ar-button" id="ar">📱 Ver en tu espacio (AR)</button>
+    </model-viewer>
+    <div class="hint">👆 Arrastra para girar · pellizca para acercar · prueba el botón AR para verlo en tu habitación</div>
+  </div>
+  <div class="card info">
+    <div><div class="tag">Proyecto personalizado</div><h1>${T}</h1><div class="precio">${P}</div></div>
+    ${med?'<div class="chips">'+med+'</div>':''}
+    ${d.detalles?'<p class="desc"><b>Materiales y detalles:</b> '+esc(d.detalles)+'</p>':''}
+    <p class="desc">Antes de aprobar, <b>verifica que entre en tu espacio</b> con el botón de realidad aumentada.</p>
+    <div class="trust">${trust}</div>
+    ${val?'<div class="valid">Presupuesto válido hasta el '+val+'</div>':''}
+    <a class="cta" href="${ok}" target="_blank" rel="noopener">✅ Aprobar diseño y reservar</a>
+    <a class="alt" href="${cambios}" target="_blank" rel="noopener">¿Quieres algún cambio? Escríbenos</a>
+  </div>
+</main>
+<footer>© ${new Date().getFullYear()} Studio Melaminas El Negrito</footer>
+<div class="bar"><div><small>Total</small><b>${P}</b></div><a href="${ok}" target="_blank" rel="noopener">Aprobar diseño</a></div>
+</body></html>`;
+}
+
+function update(){
+  const d=read();
+  current={d, file:(slug(d.cliente)||'cliente')+'-'+(slug(d.mueble)||'proyecto')+'-'+tok(d.cliente+d.mueble)+'.html'};
+  current.url=BASE+current.file;
+  $('url').value=current.url;
+  $('probar').href=current.url;
+  const msg='¡Hola '+(d.cliente||'')+'! 👋 Aquí está el diseño 3D de tu '+d.mueble+'. Puedes girarlo, verlo en tu espacio con realidad aumentada y aprobarlo desde ahí: '+current.url;
+  const tel=d.tel.replace(/\D/g,''), num=tel.length===9?'51'+tel:tel;
+  $('waCli').href='https://wa.me/'+num+'?text='+encodeURIComponent(msg);
+  clearTimeout(timer);
+  timer=setTimeout(()=>{$('pv').srcdoc=build(d)},500);
+}
+
+function descargar(){
+  const d=current.d;
+  if(!d.cliente||!d.mueble||!d.glb){alert('Completa al menos: cliente, mueble y archivo .glb');return}
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([build(d)],{type:'text/html;charset=utf-8'}));
+  a.download=current.file;
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
+function copiar(){
+  const i=$('url');
+  (navigator.clipboard?navigator.clipboard.writeText(i.value):Promise.reject()).catch(()=>{i.select();document.execCommand('copy')});
+  const b=event.target;b.textContent='¡Copiado!';setTimeout(()=>b.textContent='Copiar',1500);
+}
+
+const dt=new Date();dt.setDate(dt.getDate()+7);
+$('valido').value=dt.toISOString().slice(0,10);
+document.querySelectorAll('input,textarea').forEach(e=>e.addEventListener('input',update));
+update();
+</script>
+</body>
+</html>

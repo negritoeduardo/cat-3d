@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>couter | Studio Melaminas El Negrito</title>
+<meta property="og:title" content="couter · diseño 3D para demostracion">
+<meta property="og:description" content="Míralo en 3D y proyéctalo en tu casa con realidad aumentada.">
+<meta property="og:image" content="https://negritoeduardo.github.io/cat-3d/logo-negrito.jpg">
+<script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0c0d11;--card:#15171d;--line:#262a33;--tx:#eef0f4;--su:#9aa1ad;--am:#ffb02e;--or:#ff7a1a;--wa:#25d366}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',system-ui,sans-serif}
+body{background:var(--bg);color:var(--tx);line-height:1.5;padding-bottom:96px}
+header{text-align:center;padding:20px 16px 6px}
+header img{width:96px;height:96px;border-radius:50%;border:2px solid var(--or);box-shadow:0 0 28px rgba(255,122,26,.45)}
+header p{font-size:13px;color:var(--su);margin-top:10px}
+header b{color:var(--am)}
+main{max-width:760px;margin:0 auto;padding:12px 16px;display:grid;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+model-viewer{width:100%;height:min(60vh,480px);background:radial-gradient(circle at 50% 40%,#2c2f3b,#12141a);--progress-bar-color:#ffb02e}
+#ar{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:#fff;color:#111;border:0;border-radius:999px;padding:12px 22px;font-weight:700;font-size:14px;box-shadow:0 6px 18px rgba(0,0,0,.5);cursor:pointer;white-space:nowrap}
+.hint{font-size:12px;color:var(--su);text-align:center;padding:10px 14px;border-top:1px solid var(--line)}
+.info{padding:22px;display:grid;gap:16px}
+.tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--am);font-weight:600}
+h1{font-family:'Archivo',sans-serif;font-size:26px;line-height:1.2;margin-top:4px}
+.precio{font-family:'Archivo',sans-serif;font-size:34px;font-weight:800;background:linear-gradient(135deg,var(--am),var(--or));-webkit-background-clip:text;background-clip:text;color:transparent;margin-top:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:#0f1116;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;color:var(--su)}
+.chip b{color:var(--tx)}
+.desc{color:var(--su);font-size:15px}
+.desc b{color:var(--tx)}
+.trust{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tr{display:flex;gap:10px;align-items:center;background:#0f1116;border:1px solid var(--line);border-radius:12px;padding:12px}
+.tr span{font-size:20px}
+.tr small{display:block;font-size:11px;color:var(--su);text-transform:uppercase;letter-spacing:.06em}
+.tr b{font-size:14px}
+.valid{font-size:13px;color:var(--am);background:rgba(255,176,46,.08);border:1px solid rgba(255,176,46,.3);border-radius:10px;padding:10px 12px;text-align:center}
+.cta{display:block;text-align:center;background:var(--wa);color:#06260f;font-weight:800;font-size:17px;padding:16px;border-radius:14px;text-decoration:none}
+.alt{display:block;text-align:center;color:var(--su);font-size:14px;text-decoration:underline;padding:6px}
+footer{text-align:center;padding:10px 16px 24px;font-size:12px;color:var(--su)}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:9;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:rgba(12,13,17,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+.bar small{display:block;font-size:11px;color:var(--su)}
+.bar b{font-family:'Archivo',sans-serif;font-size:20px;color:var(--am)}
+.bar a{background:var(--wa);color:#06260f;font-weight:800;padding:13px 20px;border-radius:12px;text-decoration:none;font-size:15px}
+</style></head>
+<body>
+<header>
+  <img src="https://negritoeduardo.github.io/cat-3d/logo-negrito-256.jpg" alt="Studio Melaminas El Negrito">
+  <p>Diseño exclusivo para <b>demostracion</b></p>
+</header>
+<main>
+  <div class="card">
+    <model-viewer src="https://negritoeduardo.github.io/cat-3d/couter.glb" alt="couter" camera-controls auto-rotate touch-action="pan-y" ar ar-modes="webxr scene-viewer quick-look" shadow-intensity="1" environment-image="neutral">
+      <button slot="ar-button" id="ar">📱 Ver en tu espacio (AR)</button>
+    </model-viewer>
+    <div class="hint">👆 Arrastra para girar · pellizca para acercar · prueba el botón AR para verlo en tu habitación</div>
+  </div>
+  <div class="card info">
+    <div><div class="tag">Proyecto personalizado</div><h1>couter</h1><div class="precio">S/ 1,200.00</div></div>
+    
+    <p class="desc"><b>Materiales y detalles:</b> Melamina texturada color Nogal con herrajes cierre lento y espejo biselado.</p>
+    <p class="desc">Antes de aprobar, <b>verifica que entre en tu espacio</b> con el botón de realidad aumentada.</p>
+    <div class="trust"><div class="tr"><span>⏱</span><div><small>Entrega</small><b>15 días hábiles</b></div></div><div class="tr"><span>💳</span><div><small>Adelanto</small><b>50% (S/ 600.00)</b></div></div><div class="tr"><span>🛡</span><div><small>Garantía</small><b>6 meses</b></div></div><div class="tr"><span>📐</span><div><small>Fabricación</small><b>A tu medida</b></div></div></div>
+    <div class="valid">Presupuesto válido hasta el 19 de noviembre de 2026</div>
+    <a class="cta" href="https://wa.me/51916949028?text=%C2%A1Hola!%20Soy%20demostracion.%20Revis%C3%A9%20el%20dise%C3%B1o%203D%20de%20mi%20couter%20(S%2F%201%2C200.00)%20y%20quiero%20aprobarlo%20y%20reservar%20con%20el%20adelanto." target="_blank" rel="noopener">✅ Aprobar diseño y reservar</a>
+    <a class="alt" href="https://wa.me/51916949028?text=Hola%2C%20soy%20demostracion.%20Vi%20el%20dise%C3%B1o%203D%20de%20mi%20couter%20y%20me%20gustar%C3%ADa%20pedir%20estos%20cambios%3A%20" target="_blank" rel="noopener">¿Quieres algún cambio? Escríbenos</a>
+  </div>
+</main>
+<footer>© 2026 Studio Melaminas El Negrito</footer>
+<div class="bar"><div><small>Total</small><b>S/ 1,200.00</b></div><a href="https://wa.me/51916949028?text=%C2%A1Hola!%20Soy%20demostracion.%20Revis%C3%A9%20el%20dise%C3%B1o%203D%20de%20mi%20couter%20(S%2F%201%2C200.00)%20y%20quiero%20aprobarlo%20y%20reservar%20con%20el%20adelanto." target="_blank" rel="noopener">Aprobar diseño</a></div>
+</body></html>
